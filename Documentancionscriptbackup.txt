@@ -1,0 +1,284 @@
+// Leer: este es la explicacion de dicho codigo del juego de ajedrez, para tener un contexto claro de como use dicho codigo para el funcionamiento de la app:
+
+-------------------Variables Globales:-----------------------------
+var board1;
+var game = new Chess();
+var timer = {
+    white: 0,
+    black: 0,
+};
+var initialTime = 3600; // Default al tiempo clasico (60 mins)
+var currentPlayer = 'w';
+var timerInterval;
+
+board1: Se usa para almacenar el objeto del tablero de ajedrez.
+
+game: Un nuevo objeto de juego de ajedrez, probablemente usando una biblioteca de ajedrez que maneja la lógica del juego.
+
+timer: Un objeto que almacena el tiempo restante para los jugadores blanco y negro.
+
+initialTime: Tiempo inicial para cada jugador, por defecto 3600 segundos (60 minutos).
+
+currentPlayer: Almacena el jugador actual que está en turno ('w' para blanco, 'b' para negro).
+
+timerInterval: Para manejar el intervalo del temporizador.
+
+----------------Variable para la coloracion de las casillas.
+var whiteSquareGrey = '#a9a9a9';
+
+var blackSquareGrey = '#696969';
+
+Define los colores de sombreado para las casillas blancas y negras.
+
+=======================================================Seccion de funciones===========================
+-----------------------------------------Funciones de Sombreado-----------------
+function removeGreySquares() {
+    $('#board1 .square-55d63').css('background', '');
+}
+
+function greySquare(square) {
+    var $square = $('#board1 .square-' + square);
+
+    var background = whiteSquareGrey;
+    if ($square.hasClass('black-3c85d')) {
+        background = blackSquareGrey;
+    }
+
+    $square.css('background', background);
+}
+
+removeGreySquares: Elimina el sombreado de todas las casillas.
+
+greySquare: Sombrea una casilla específica, usando el color correspondiente dependiendo si la casilla es negra o blanca.
+
+-------------------------------Inicialización del Juego----------------------------
+function initializeGame() {
+    game = new Chess();
+    board1 = ChessBoard('board1', {
+        draggable: true,
+        position: 'start',
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        onMouseoverSquare: onMouseoverSquare,
+        onMouseoutSquare: onMouseoutSquare,
+        onSnapEnd: onSnapEnd
+    });
+
+    updateMoveHistory();
+    startTimer();
+}
+
+
+initializeGame: Reinicia el juego y el tablero, permitiendo arrastrar piezas, configurando eventos y comenzando el temporizador.
+
+----------------------------Temporizador del Juego----------------------------
+function startTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+
+    var selectedTimeControl = document.getElementById('time-control').value;
+    if (selectedTimeControl === 'classic') {
+        initialTime = 3600; 
+    } else if (selectedTimeControl === 'ten-min') {
+        initialTime = 600; 
+    } else if (selectedTimeControl === 'blitz') {
+        initialTime = 300; 
+    }
+
+    timer.white = initialTime;
+    timer.black = initialTime;
+
+    document.getElementById('white-timer').innerText = `White: ${formatTime(timer.white)}`;
+    document.getElementById('black-timer').innerText = `Black: ${formatTime(timer.black)}`;
+
+    timerInterval = setInterval(function() {
+        if (currentPlayer === 'w') {
+            timer.white--;
+            document.getElementById('white-timer').innerText = `White: ${formatTime(timer.white)}`;
+        } else {
+            timer.black--;
+            document.getElementById('black-timer').innerText = `Black: ${formatTime(timer.black)}`;
+        }
+
+        if (timer.white <= 0 || timer.black <= 0) {
+            clearInterval(timerInterval);
+            alert('Game Over! El tiempo se ha terminado.');
+        }
+    }, 1000);
+}
+
+startTimer: Configura el temporizador según el control de tiempo seleccionado (classic, ten-min, blitz) y actualiza el reloj cada segundo. Detiene el juego si el tiempo de un jugador llega a 0.
+
+
+----------------------------Formato de Tiempo----------------------
+function formatTime(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var secs = seconds % 60;
+    return `${pad(minutes)}:${pad(secs)}`;
+}
+
+function pad(number) {
+    return number < 10 ? '0' + number : number;
+}
+
+formatTime: Convierte los segundos en un formato MM:SS.
+
+pad: Añade un cero adelante si el número es menor que 10 para mantener el formato.
+
+-------------------------------------Manejo de Arrastre y Colocación de Piezas--------------------------
+
+function onDragStart(source, piece, position, orientation) {
+    if (game.game_over() || 
+        (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+        (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+        return false;
+    }
+}
+
+function onDrop(source, target) {
+    removeGreySquares();
+
+    var move = game.move({
+        from: source,
+        to: target,
+        promotion: 'q' 
+    });
+
+    if (move === null) return 'snapback';
+
+    updateMoveHistory();
+    currentPlayer = (currentPlayer === 'w') ? 'b' : 'w';
+
+    var gameMode = document.getElementById('game-mode').value;
+    if (gameMode === 'ai') {
+        board1.position(game.fen());
+        setTimeout(makeBestMove, 250);
+    } else {
+        board1.position(game.fen());
+    }
+}
+
+onDragStart: Verifica si el juego ha terminado o si el jugador está intentando mover la pieza equivocada, en cuyo caso impide el arrastre.
+
+onDrop: Verifica si el movimiento es válido, lo realiza, actualiza el historial y cambia de turno. Si se juega contra la IA, realiza el siguiente movimiento de la IA.
+
+---------------------------------Eventos de Resaltado de Casillas---------------------
+
+function onMouseoverSquare(square, piece) {
+    var moves = game.moves({
+        square: square,
+        verbose: true
+    });
+
+    if (moves.length === 0) return;
+
+    greySquare(square);
+
+    for (var i = 0; i < moves.length; i++) {
+        greySquare(moves[i].to);
+    }
+}
+
+function onMouseoutSquare(square, piece) {
+    removeGreySquares();
+}
+
+onMouseoverSquare: Resalta las casillas donde la pieza seleccionada puede moverse.
+
+onMouseoutSquare: Elimina el resaltado cuando el ratón sale de la casilla.
+
+-----------------------------------Movimientos de la IA--------------------
+
+function makeBestMove() {
+    var difficulty = document.getElementById('difficulty').value;
+
+    if (difficulty === 'easy') {
+        makeRandomMove();
+    } else if (difficulty === 'medium') {
+        makeBestCaptureMove();
+    } else if (difficulty === 'hard') {
+        makeSmartMove();
+    }
+
+    updateMoveHistory();
+    currentPlayer = 'w';
+    board1.position(game.fen());
+}
+
+function makeRandomMove() {
+    var possibleMoves = game.moves();
+    if (possibleMoves.length === 0) return;
+    var randomIdx = Math.floor(Math.random() * possibleMoves.length);
+    game.move(possibleMoves[randomIdx]);
+    board1.position(game.fen());
+}
+
+function makeBestCaptureMove() {
+    var possibleMoves = game.moves({ verbose: true });
+    var bestMove = null;
+    var bestValue = -9999;
+
+    possibleMoves.forEach(function(move) {
+        if (move.flags.includes('c')) {
+            var captureValue = getPieceValue(move.captured);
+            if (captureValue > bestValue) {
+                bestValue = captureValue;
+                bestMove = move;
+            }
+        }
+    });
+
+    if (!bestMove) {
+        makeRandomMove();
+    } else {
+        game.move(bestMove.san);
+        board1.position(game.fen());
+    }
+}
+
+function makeSmartMove() {
+    var possibleMoves = game.moves();
+    var bestMove = null;
+    var bestValue = -9999;
+
+    possibleMoves.forEach(function(move) {
+        game.move(move);
+        var boardValue = -evaluateBoard(game.board);
+        game.undo();
+
+        if (boardValue > bestValue) {
+            bestValue = boardValue;
+            bestMove = move;
+        }
+    });
+
+    if (bestMove) {
+        game.move(bestMove);
+        board1.position(game.fen());
+    }
+}
+
+makeBestMove: Realiza un movimiento basado en la dificultad seleccionada: fácil (aleatorio), medio (mejor captura) o difícil (más inteligente).
+
+makeRandomMove: Selecciona un movimiento aleatorio.
+
+**makeBestCaptureMove : Descripción:
+Esta función analiza todos los movimientos posibles y selecciona el mejor movimiento de captura disponible.
+
+Se obtiene una lista de todos los movimientos posibles con game.moves({ verbose: true }), donde verbose: true proporciona detalles adicionales sobre los movimientos.
+
+Para cada movimiento, se verifica si es una captura comprobando si el movimiento tiene la bandera 'c'.
+
+Si es una captura, se evalúa el valor de la pieza capturada usando la función getPieceValue, que asigna un valor numérico a cada tipo de pieza.
+
+El movimiento de captura con el valor más alto es seleccionado como el mejor.
+
+Si no se encuentra ningún movimiento de captura (es decir, bestMove sigue siendo null), la función realiza un movimiento aleatorio llamando a makeRandomMove().
+
+Si se encuentra un movimiento de captura, se realiza ese movimiento (game.move(bestMove.san)) y se actualiza el tablero.
+
+Otras Funciones Relacionadas: 
+getPieceValue(piece): Devuelve el valor numérico de una pieza basada en su tipo (peón, torre, caballo, alfil, dama, rey).
+
+evaluateBoard(board): Evalúa el valor total del tablero sumando los valores de todas las piezas presentes.
+
+Con estas funciones, el código intenta imitar una forma básica de "inteligencia" para la IA en un nivel de dificultad medio, donde prioriza capturar piezas de mayor valor en lugar de realizar movimientos aleatorios.

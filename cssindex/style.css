@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000&family=Roboto+Slab:wght@700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Si tengo secciones más largas o quiero un desplazamiento más suave, agrego un pequeño estilo CSS para hacer que el scroll sea suave: */
+html {
+    scroll-behavior: smooth;
+  }
+
+/*---------------------------------------------------------------*/
+
+/* Seccion navbar  */
+
+.sidenav {
+    width: 100%;
+    background-color: #195680;
+    padding: 15px 0;
+    position: fixed; /* Fix the navbar in place */
+    top: 0; /* Align it to the top of the page */
+    left: 0; /* Align it to the left side of the page */
+    z-index: 1000; /* Make sure it stays on top of other content */
+}
+
+.sidenav ul {
+    list-style-type: none;
+}
+
+.sidenav li {
+    display: inline-block;
+    width: 24%;
+    
+}
+
+.sidenav a {
+    display: block;
+    color: hsl(218, 6%, 76%);
+    text-decoration: none;
+    padding: 1px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.sidenav a:hover {
+    background-color: #010202;
+}
+
+body {
+    padding-top: 50px; /* Add padding to the top of the body content to prevent it from being hidden behind the fixed navbar */
+}
+/*------------------------------------------------------*/
+
+
+/* Botton para acceder al juego */
+
+.centered-container {
+    display: flex;
+    position: absolute; /* Posiciona el contenedor de manera absoluta respecto a .image-container */
+    top: 78%;           /* Centra verticalmente */
+    left: 50%;          /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Ajuste fino para un centrado perfecto */
+}
+
+.btn {
+    font-size: 2rem; /* Ajusta el tamaño del ícono si es necesario */
+    text-decoration: none; /* Opcional: elimina el subrayado */
+    color: inherit; /* Hereda el color del contenedor */
+
+    border: none; 
+    color: white; 
+    padding: 9px 28px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    display: inline-flex;
+}
+
+  .btn i {
+    margin-right: 5px;
+  }
+
+  .success {background-color: #04AA6D;} 
+  .success:hover {background-color: #46a049;}
+
+/*----------------------------------  */
+
+body {
+    background-image: url(images/backgroundbody.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+    font-family: 'Roboto Slab', serif;
+}
+
+.formato1 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-container {
+    position: relative;
+    margin-top: 2px;
+    width: 100%;
+    overflow: hidden;
+   margin-bottom: 10px;
+   box-shadow: -3px 0 105px #adacac,
+                -3px 0 105px #000000;
+}
+
+.formato1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra el contenido */
+}
+
+  .in-flex {
+    flex: 1;
+    max-width: 1050px; /* Limita el ancho máximo */
+    width: 100%;
+    padding: 0 20; /* Añade relleno a los lados */
+    background-color: rgb(87, 85, 85);
+    margin: 0 auto; /* Añade margen superior e inferior y centra horizontalmente */
+  }
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+  .in-flex {
+      padding: 0 30px; /* Más relleno en pantallas más grandes */
+  }
+}
+
+@media (min-width: 1024px) {
+  .in-flex {
+      padding: 0 40px; /* Aún más relleno en pantallas grandes */
+  }
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
+    background-color: #575e5e;
+    color: rgb(218, 214, 214);
+    font-weight: 430;
+}
+ 
+.image-containermini img {
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 90px;
+}
+
+.Imgcontainerbody a {
+color: #b1bcc9;
+}
+
+.grid-item {
+    background-image: url(images/background-image.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Imagenes en la area de body. */
+.Imgcontainerbody {
+    display: inline-block;
+    text-align: center;
+    width: 250px;
+    margin: 15px;
+}
+
+.Imgcontainerbody p, h2 {
+    color: rgb(224, 222, 222);
+}
+
+.Imgcontainerbody img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #ccc;
+}
+
+.caption {
+    background-color: #f8f8f8;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-top: none;
+    text-align: left;
+}
+
+.caption a {
+    color: #393b3d;
+    text-decoration: none;
+}
+
+/*-------end---------*/
+
+/*  Tabla de piezas  */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #f5f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f3eaea;
+}
+
+thead th {
+    background-color: #e91a0b;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+tbody th {
+    background-color: #f3f2f2;
+}
+
+tr {
+    background-color: rgb(173, 171, 171);
+}
+
+img{
+    width: 32px;
+    height: 32px;
+}
+
+a{
+    color: #005ff8;
+    text-decoration: none;
+}
+
+
+/*--------end----------*/
+
+.item1 img, .item4 img {
+    max-width: 100%;
+    height: auto;
+}
+
+.item4 video {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+    background: url('images/header-video.jpg') no-repeat;
+    background-size: 100% auto;
+    border: 0.5vw rgba(250, 250, 250, 0.3) solid;
+    box-shadow: -3px 0 105px rgba(250, 250, 100, 0.25),
+                -3px 0 105px rgba(250, 250, 100, 0.25);
+}
+
+
+@media (min-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .item1 {
+        grid-column: 1 / span 3;
+        grid-row: 1;
+    }
+
+    .item2 {
+        grid-column: 1 / span 3;
+        grid-row: 2;
+    }
+
+    .item3 {
+        grid-column: 1 / span 3;
+        grid-row: 3;
+    }
+
+    .item4 {
+        grid-column: 1 / span 3;
+        grid-row: 4;
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .item1 {
+        grid-column: 1 / span 3;
+        grid-row: 1;
+    }
+
+    .item2 {
+        grid-column: 1 / span 3;
+        grid-row: 2;
+    }
+
+    .item3 {
+        grid-column: 1 / span 3;
+        grid-row: 3;
+    }
+
+    .item4 {
+        grid-column: 1 / span 3;
+        grid-row: 4;
+    }
+}

@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(124, 20, 20);
+    font-family: 'Roboto Slab', serif;
+}
+
+.formato1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra el contenido */
+}
+
+.in-flex {
+    flex: 1;
+    max-width: 1050px; /* Limita el ancho máximo */
+    width: 100%;
+    padding: 0 20; /* Añade relleno a los lados */
+    background-color: rgb(87, 85, 85);
+    margin: 60px auto; /* Añade margen superior e inferior y centra horizontalmente */
+    border-radius: 15px;
+    box-shadow: -3px 0 105px rgba(207, 206, 206, 0.25),
+                -3px 0 105px rgba(99, 99, 97, 0.25);
+    
+  }
+
+/*----------------------- Style for move history container---------------- */
+#move-history-container {
+    margin-top: 20px; /* Space above the move history */
+    overflow-y: auto; /* Allow vertical scrolling if needed */
+    max-height: 470px; /* Adjust height based on your design */
+    width: 90vw; /* Responsive width */
+    max-width: 198px; /* Maximum width of the move history container */
+}
+
+#move-history {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse; /* Remove space between cells */
+}
+
+#move-history th, #move-history td {
+    border: 1px solid #d80d0d; /* Border for table cells */
+    padding: 8px; /* Space inside cells */
+}
+
+#move-history th {
+    background-color: #f02a2a; /* Light background for headers */
+}
+
+/*--------------------end---------*/
+
+
+.image-containermini img {
+    border-radius: 5px;
+    width: 68px;
+}
+
+
+/*------------------- Estilo del selector de tiempo --------------*/
+#time-control {
+    width: 100%;
+    max-width: 250px; /* Ancho máximo del selector */
+    padding: 10px; /* Espacio interno */
+    font-size: 1.1em; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
+    background-color: #007BFF; /* Fondo azul */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    cursor: pointer; /* Cursor de mano */
+    transition: background-color 0.3s ease; /* Transición suave */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Cambia el color de fondo al pasar el cursor */
+#time-control:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo del contenedor de los temporizadores */
+#timers {
+    display: flex;
+    justify-content: space-between; /* Espaciado entre los temporizadores */
+    width: 100%;
+    max-width: 300px; /* Ancho máximo del contenedor */
+    background-color: #fff; /* Fondo blanco */
+    padding: 15px; /* Espacio interno */
+    border: 2px solid #007BFF; /* Borde azul */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 10px; /* Espacio inferior */
+    text-align: center; /* Texto centrado */
+}
+
+/* Estilo de cada temporizador */
+#timers div {
+    width: 48%; /* Ocupa el 48% del espacio disponible */
+    font-size: 1.2em; /* Tamaño de fuente */
+    color: #007BFF; /* Color del texto */
+    background-color: #f0f0f0; /* Fondo gris claro */
+    padding: 10px; /* Espacio interno */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ddd; /* Borde gris claro */
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px) {
+    #timers {
+        flex-direction: column; /* Temporizadores en columna */
+        align-items: center; /* Centrar en columnas */
+    }
+
+    #timers div {
+        width: 100%; /* Ocupa el 100% en pantallas pequeñas */
+        margin-bottom: 10px; /* Espacio entre los temporizadores */
+    }
+}  
+
+/*----------------------------------------------  */
+
+
+
+/* Estilos para los selectores */
+select {
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    font-size: 1.1em;
+    color: #333;
+    background-color: #fff;
+    border: 2px solid #007BFF;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+select:hover {
+    border-color: #0056b3;
+}
+
+/* Estilo para el mensaje de game over */
+#game-over-message {
+    color: red;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Estilo para los botones */
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 10px 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #004085;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px) {
+    select {
+        max-width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    #game-result {
+        max-width: 100%;
+    }
+}
+
+
+  @media (min-width: 768px) {
+    .in-flex {
+        padding: 0 30px; /* Más relleno en pantallas más grandes */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .in-flex {
+        padding: 0 40px; /* Aún más relleno en pantallas grandes */
+    }
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
+    background-color: #575e5e;
+    color: rgb(218, 214, 214);
+    font-weight: 430;
+}
+ 
+.grid-item {
+    background-color: black;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+
+
+@media (min-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .item1 {
+        grid-row: 1;
+    }
+    .item2 {
+        grid-column: 1;
+    }
+    .item3 {
+        grid-column: 2;
+    }
+    .item4 {
+        grid-column: 3;
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .item1 {
+        grid-column: 1 / 4;
+    }
+    
+}

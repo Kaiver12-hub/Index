@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess</title>
+  <link rel="stylesheet" href="css/chessboard-1.0.0.min.css">
+  <link rel="stylesheet" href="cssajedrez/stylesajedrez.css">
+
+</head>
+
+<body>
+
+  <!-- Inicia el formato1 -->
+  <section class="formato1">
+
+    <!-- Inicio del in-flex -->
+    <div class="in-flex">
+
+      <!-- Inicio del grid-container-->
+      <div class="grid-container">
+
+        <!-- Inicio del item1-->
+        <div class="grid-item item1">
+          <div class="image-containermini">
+          <img src="/images/logo principal.png" alt="">
+        </div>
+
+          <select id="game-mode">
+            <option value="two-players">2 jugadores</option>
+            <option value="ai">Jugar contra la IA</option>
+          </select>
+
+          <select id="player-color">
+            <option value="w">Pieza blanca</option>
+            <option value="b">Pieza negra</option>
+          </select>
+
+          <!-- Button to start the game -->
+          <button id="start-game">Comenzar</button>
+
+          <!-- Button to reset the game -->
+          <button id="reset-game">Resetear la tabla</button>
+
+          <!-- Contenedor para mostrar el resultado del juego -->
+          <div id="game-result" style="font-size: 18px; font-weight: bold; margin-top: 10px;"></div>
+
+          <div id="game-over-message" style="color: red; font-size: 20px; text-align: center;"></div>
+
+        </div><!-- Fin del item1-->
+
+        <!-- Inicio del item2-->
+        <div class="grid-item item2">
+          
+          <!-- Contenedor con desplazamiento para el historial de movimientos -->
+          <div id="move-history-container">
+            <table id="move-history">
+              <thead>
+                <tr>
+                  <th>Move #</th>
+                  <th>Blanca</th>
+                  <th>Negra</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+
+        </div><!-- Fin del item2-->
+
+        <!-- Inicio del item3-->
+        <div class="grid-item item3">
+
+          <div id="board1" style="width: 500px"></div>  
+
+        </div> <!-- Fin del item3 -->
+
+        <!-- Inicio de item4 -->
+        <div class="grid-item item4">
+
+          <h3>Modo de tiempo</h3>           
+          <select id="time-control">
+            <option value="classic">Clasico(60 mins)</option>
+            <option value="ten-min">10 Minutos</option>
+            <option value="blitz">Blitz (5 minutos)</option>
+          </select>
+
+          <h3>Tiempo de juego </h3> 
+          <div id="timers">
+            <div id="white-timer">Pieza Blanca: 00:00</div>
+            <div id="black-timer">Pieza Negra: 00:00</div>
+          </div>
+
+          <h3>Nivel de dificultad contra la IA</h3>
+          <select id="difficulty">
+            <option value="easy">Facil</option>
+            <option value="medium">Intermedio</option>
+          </select>
+
+        </div> <!-- Fin del item4 -->
+
+      </div><!-- Fin del grin-container -->
+    </div> <!-- Fin del in-flex -->
+
+  </section><!-- fin del formato1 -->
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2"
+    crossorigin="anonymous"></script>
+  <script src="js/chessboard-1.0.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.min.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+------------------------------- LIBRERIAS --------------------------------------------
+-.Chessboard.js es una biblioteca de JavaScript que se utiliza para mostrar y controlar un tablero de ajedrez en una página web. Es una herramienta popular entre los desarrolladores que están creando aplicaciones o juegos de ajedrez basados en la web, ya que proporciona una interfaz visual simple y personalizable para representar un tablero de ajedrez interactivo.
+
+Características principales de Chessboard.js:
+*Renderizado del tablero: Muestra un tablero de ajedrez con todas las piezas. El tablero es completamente interactivo y responde a las acciones del usuario, como arrastrar y soltar piezas.
+
+*Integración con otras bibliotecas: Chessboard.js está diseñado para ser una herramienta de visualización. No incluye la lógica del juego (por ejemplo, las reglas del ajedrez, la validación de movimientos), pero se puede combinar fácilmente con bibliotecas como chess.js, que maneja la lógica del juego.
+
+*Personalización: Puedes personalizar la apariencia del tablero, las piezas, y cómo se manejan los movimientos. Por ejemplo, puedes definir estilos para las piezas, elegir diferentes temas para el tablero, y ajustar cómo se manejan las animaciones.
+
+*Responde a diferentes tamaños de pantalla: El tablero se puede hacer responsive, ajustándose automáticamente a diferentes tamaños de pantalla, lo que es útil para aplicaciones que se usarán en dispositivos móviles y de escritorio.
+
+
+
+-----------------------------------------------------   ALGORITMOS ----------------------------------
+
+-.Algoritmo MiniMax se puede utilizar para implementar diferentes niveles de dificultad en un motor de ajedrez, como intermedio y difícil. 
+La dificultad se ajusta principalmente a través de la profundidad de búsqueda del algoritmo, que es la cantidad de movimientos (turnos) que el algoritmo evalúa antes de tomar una decisión.
+
+-.Mejora del algoritmo con Alpha-Beta Pruning
+El MiniMax puede ser optimizado con Alpha-Beta Pruning, una técnica que reduce significativamente la cantidad de nodos evaluados en el árbol de decisiones sin afectar el resultado final. Esto permite que el motor busque a mayor profundidad sin incrementar demasiado el tiempo de cómputo.
